@@ -1,38 +1,31 @@
 <script setup>
-import { ChartBarIcon, ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline'
-// const navItems1 = ['timeline', 'progress', 'activities']
+import NavItem from './NavItem.vue'
+import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants/index.js'
+import { ChartBarIcon, ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline/index.js'
+
 const navItems = {
-  timeline: ClockIcon,
-  progress: ChartBarIcon,
-  activities: ListBulletIcon,
+  [PAGE_TIMELINE]: ClockIcon,
+  [PAGE_PROGRESS]: ChartBarIcon,
+  [PAGE_ACTIVITIES]: ListBulletIcon,
 }
+
+defineProps(['currentPage'])
+
+const emit = defineEmits(['navigate'])
 </script>
 
 <template>
-  Navigation:
-  <ul class="flex w-full items-center justify-around">
-    <li v-for="(icon, page) in navItems" :key="page" class="flex-1">
-      <a :href="`#${page}`">
-        <!--        variant render #2 use component-->
-        <component :is="icon" class="h-6 w-6" />
-        {{ page }}
-      </a>
-    </li>
-  </ul>
+  <nav class="sticky bottom-0 z-10 bg-white">
+    <ul class="flex items-center justify-around border-t">
+      <NavItem
+        v-for="(icon, page) in navItems"
+        :key="page"
+        :href="`#${page}`"
+        :class="{ 'pointer-events-none bg-gray-200': page === currentPage }"
+        @click="emit('navigate', page)"
+      >
+        <component :is="icon" class="h-6 w-6" /> {{ page }}
+      </NavItem>
+    </ul>
+  </nav>
 </template>
-
-<!--        variant render #1 use v-if-->
-<!--<template>-->
-<!--  Navigation:-->
-<!--  <ul class="flex w-full items-center justify-around">-->
-<!--    <li v-for="page in navItems1" :key="page" class="flex-1">-->
-<!--      <a :href="`#${page}`">-->
-<!--        &lt;!&ndash;    variant render #2&ndash;&gt;-->
-<!--        <ClockIcon v-if="page === 'timeline'" class="h-6 w-6" />-->
-<!--        <ChartBarIcon v-else-if="page === 'progress'" class="h-6 w-6" />-->
-<!--        <ListBulletIcon v-else class="h-6 w-6" />-->
-<!--        {{ page }}-->
-<!--      </a>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</template>-->
