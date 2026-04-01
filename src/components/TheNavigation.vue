@@ -1,17 +1,19 @@
 <script setup>
 import NavItem from './NavItem.vue'
-import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants/index.js'
-import { ChartBarIcon, ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline/index.js'
+import { navItems } from '@/constants/index.js'
+import { isPageValid } from '@/utilities/validators.js'
 
-const navItems = {
-  [PAGE_TIMELINE]: ClockIcon,
-  [PAGE_PROGRESS]: ChartBarIcon,
-  [PAGE_ACTIVITIES]: ListBulletIcon,
-}
+defineProps({
+  currentPage: {
+    required: true,
+    type: String,
+    validator: isPageValid,
+  },
+})
 
-defineProps(['currentPage'])
-
-const emit = defineEmits(['navigate'])
+const emit = defineEmits({
+  navigate: isPageValid,
+})
 </script>
 
 <template>
