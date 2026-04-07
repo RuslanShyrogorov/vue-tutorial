@@ -24,6 +24,9 @@ const emit = defineEmits({
   select: isNumberOrNull,
 })
 const isNotSelected = computed(() => isUndefinedOrNull(props.selected))
+
+const removeItem = ['one', 'two']
+console.log(removeItem)
 </script>
 
 <template>

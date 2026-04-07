@@ -14,6 +14,9 @@ defineProps({
   },
 })
 
+const removeItem = ['one', 'two']
+console.log(removeItem)
+
 const secondsToComplete = ref(null)
 </script>
 
