@@ -7,6 +7,9 @@ import { PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants/index.js'
 const emit = defineEmits({
   navigate: isPageValid,
 })
+
+const removeItem = ['one', 'two']
+console.log(removeItem)
 </script>
 
 <template>
